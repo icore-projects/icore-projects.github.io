@@ -1,0 +1,19 @@
+[
+  {
+    "id": "mqrpp1hft5m7n",
+    "name": "I.Core Accounts",
+    "description": "Account Manager of I.Core project with various permissions & Groups. Designed with Servlet, JSP, MY SQL Database",
+    "screenshots": [
+      "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/Login%20(2).png",
+      "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/UserDashboard.png",
+      "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/UserProfile.png",
+      "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/editProfile.png",
+      "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/settings.png.png",
+      "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/RegisterUser.png"
+    ],
+    "version": "v1.2.0-alpha",
+    "githubReleaseUrl": "https://github.com/Tharvesh2026/projects/releases/tag/v1.2.0-alpha",
+    "openUrl": "https://cloud.imtharvesh.me/icore/",
+    "createdAt": 1782283696323
+  }
+]
