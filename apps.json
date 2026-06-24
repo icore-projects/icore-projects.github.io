@@ -8,8 +8,8 @@
       "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/UserDashboard.png",
       "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/UserProfile.png",
       "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/editProfile.png",
-      "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/settings.png.png",
-      "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/RegisterUser.png"
+      "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/settings.png",
+      "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/registerUser.png"
     ],
     "version": "v1.2.0-alpha",
     "githubReleaseUrl": "https://github.com/Tharvesh2026/projects/releases/tag/v1.2.0-alpha",
