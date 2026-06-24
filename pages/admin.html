@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin — I.Core Projects</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Ccircle cx='15' cy='15' r='14' fill='%230a0c10'/%3E%3Ccircle cx='15' cy='15' r='4.2' fill='%23ff8a3d'/%3E%3Ccircle cx='15' cy='15' r='10' fill='none' stroke='%235ee6d0' stroke-width='1.4'/%3E%3Ccircle cx='25' cy='15' r='2' fill='%235ee6d0'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+<!-- ============ LOCK SCREEN ============ -->
+<div class="lock-screen" id="lock-screen">
+  <div class="lock-card">
+    <div class="brand">
+      <svg class="orbit-mark" viewBox="0 0 30 30" aria-hidden="true">
+        <circle class="ring" cx="15" cy="15" r="10"></circle>
+        <circle class="nucleus" cx="15" cy="15" r="4.2"></circle>
+        <g class="spin"><circle class="electron" cx="25" cy="15" r="2"></circle></g>
+      </svg>
+      <div class="brand-text">
+        <span class="wordmark">I<span class="dot">·</span>CORE</span>
+        <span class="tagline">Admin dashboard</span>
+      </div>
+    </div>
+
+    <h1>Connect to publish</h1>
+    <p class="sub">Apps are published by committing <code>apps.json</code> to this repo, so the dashboard needs a GitHub token with write access to do that. The token stays in your browser only — it's never uploaded anywhere except directly to GitHub's API.</p>
+
+    <div class="field">
+      <label class="field-label" for="gh-token">GitHub personal access token <span class="req">*</span></label>
+      <input type="password" id="gh-token" placeholder="ghp_…" autocomplete="off" />
+      <div class="field-hint">Needs <strong>Contents: Read and write</strong> on this repo. <a class="muted-link" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Create a fine-grained token →</a></div>
+      <div class="field-error" id="token-error">Enter a token to connect.</div>
+    </div>
+
+    <div class="field">
+      <label class="checkbox-row">
+        <input type="checkbox" id="remember-token" />
+        Remember this token on this device
+      </label>
+    </div>
+
+    <div class="lock-actions">
+      <button class="btn btn-solid btn-block" id="connect-btn">Connect to GitHub</button>
+    </div>
+
+    <div class="divider-text">or</div>
+
+    <button class="btn btn-ghost btn-block" id="local-preview-btn">Continue in local preview mode</button>
+    <p class="field-hint" style="margin-top:10px;">Local preview saves apps only in this browser, just to try out the dashboard. Nothing publishes to the public site until you connect a token.</p>
+  </div>
+</div>
+
+<!-- ============ DASHBOARD ============ -->
+<div id="dashboard" hidden>
+  <header class="nav">
+    <div class="shell nav-inner">
+      <div class="brand">
+        <svg class="orbit-mark" viewBox="0 0 30 30" aria-hidden="true">
+          <circle class="ring" cx="15" cy="15" r="10"></circle>
+          <circle class="nucleus" cx="15" cy="15" r="4.2"></circle>
+          <g class="spin"><circle class="electron" cx="25" cy="15" r="2"></circle></g>
+        </svg>
+        <div class="brand-text">
+          <span class="wordmark">I<span class="dot">·</span>CORE</span>
+          <span class="tagline">Admin dashboard</span>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <a class="nav-link" href="../index.html">View gallery</a>
+        <button class="nav-link" id="disconnect-btn" style="border-color: var(--line);">Disconnect</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <div style="padding-top:22px;">
+      <div class="status-banner" id="status-banner">
+        <div class="left"><span class="status-dot"></span><span id="status-text">Checking connection…</span></div>
+      </div>
+    </div>
+
+    <div class="dash-grid">
+      <!-- Upload / edit form -->
+      <section class="panel">
+        <h2 id="form-heading">Upload new app</h2>
+        <p class="panel-sub">Fields marked <span class="req" style="color:var(--accent)">*</span> are required.</p>
+
+        <form id="app-form" novalidate>
+          <input type="hidden" id="app-id" value="" />
+
+          <div class="field" id="field-name">
+            <label class="field-label" for="app-name">App name <span class="req">*</span></label>
+            <input type="text" id="app-name" placeholder="e.g. CoreNotes" maxlength="80" />
+            <div class="field-error">Give the app a name.</div>
+          </div>
+
+          <div class="field" id="field-desc">
+            <label class="field-label" for="app-desc">Description <span class="opt">(optional)</span></label>
+            <textarea id="app-desc" rows="3" placeholder="What does this app do?" maxlength="600"></textarea>
+          </div>
+
+          <div class="field" id="field-shots">
+            <label class="field-label">Screenshots — image URLs <span class="req">*</span> <span class="opt">(minimum 2)</span></label>
+            <div id="shot-rows"></div>
+            <button type="button" class="btn btn-ghost btn-sm" id="add-shot-btn">+ Add another screenshot</button>
+            <div class="field-error" id="shots-error">Add at least 2 valid image URLs.</div>
+          </div>
+
+          <div class="field" id="field-version">
+            <label class="field-label" for="app-version">Version details <span class="req">*</span></label>
+            <input type="text" id="app-version" placeholder="e.g. v1.3.0" maxlength="40" />
+            <div class="field-error">Add a version (e.g. v1.0.0).</div>
+          </div>
+
+          <div class="field" id="field-release">
+            <label class="field-label" for="app-release">GitHub release URL <span class="opt">(optional)</span></label>
+            <input type="url" id="app-release" placeholder="https://github.com/owner/repo/releases/tag/v1.0.0" />
+            <div class="field-hint">Powers the <strong>Source</strong> button.</div>
+          </div>
+
+          <div class="field" id="field-open">
+            <label class="field-label" for="app-open">Live / open URL <span class="req">*</span></label>
+            <input type="url" id="app-open" placeholder="https://your-app-url.example.com" />
+            <div class="field-hint">Powers the <strong>Open</strong> button. Leave blank to fall back to the release URL.</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-solid" id="submit-btn">Publish app</button>
+            <button type="button" class="btn btn-ghost" id="cancel-edit-btn" hidden>Cancel edit</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Manage existing apps -->
+      <section class="panel">
+        <h2>Manage apps</h2>
+        <p class="panel-sub" id="manage-sub">Loading…</p>
+        <div class="app-list" id="app-list"></div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div id="toast-root"></div>
+
+<script src="../assets/js/admin.js" defer></script>
+</body>
+</html>

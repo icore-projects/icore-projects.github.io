@@ -1,0 +1,15 @@
+[
+  {
+    "id": "demo-app-0001",
+    "name": "CoreNotes",
+    "description": "A sample listing so you can see how a published app looks. Delete this from the admin dashboard once you've added your first real app.",
+    "screenshots": [
+      "https://picsum.photos/seed/icore-demo-1/900/506",
+      "https://picsum.photos/seed/icore-demo-2/900/506"
+    ],
+    "version": "v1.0.0 (demo)",
+    "githubReleaseUrl": "https://github.com/icore-projects",
+    "openUrl": "https://github.com",
+    "createdAt": 0
+  }
+]
