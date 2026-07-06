@@ -20,8 +20,8 @@
   },
   {
     "id": "mqrpp1hft5m7n",
-    "name": "I.Core Accounts",
-    "description": "Account Manager of I.Core project with various permissions & Groups. Designed with Servlet, JSP, MY SQL Database",
+    "name": "Identity Core",
+    "description": "Account Manager of I.Core project with various permissions & Groups. Designed with Servlet, JSP, MY SQL Database. \n\n!!! Dont worry about the warning, you can still proceed to continue. Due to the self signed certificate its throw the error",
     "screenshots": [
       "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/Login%20(2).png",
       "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/UserDashboard.png",
@@ -30,9 +30,9 @@
       "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/settings.png",
       "https://raw.githubusercontent.com/icore-projects/Image-Source/refs/heads/main/registerUser.png"
     ],
-    "version": "v1.2.0-alpha",
+    "version": "v1.2",
     "githubReleaseUrl": "https://github.com/Tharvesh2026/projects/releases/tag/v1.2.0-alpha",
-    "openUrl": "https://cloud.imtharvesh.me/icore/",
+    "openUrl": "https://icoredevelopment.sytes.net:8081/icore/",
     "createdAt": 1782283696323
   }
 ]
