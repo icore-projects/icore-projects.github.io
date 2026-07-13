@@ -1,7 +1,5 @@
 # i.Core Projects
 
-![iCore Banner](assets/images/banner.png)
-
 > Identity Core Management Platform  
 > A lightweight, role-based access control (RBAC) system inspired by modern cloud IAM platforms.
 
